@@ -1,0 +1,20 @@
+
+		
+			<div class="col-md-4 top-space">
+			  <div class="card" style="width:360px">	
+			  <h2><%= article.title %></h2>
+			  <p><%= article.created_at.strftime("%d/%m/%Y") %></p>
+			  
+			    <img class="card-img-top" src="<%= article.cover.url(:thumb) %>" alt="" style="width:100%">
+			    <div class="card-body">
+			      <h4 class="card-title"><%= article.user.email %></h4>
+			      <p class="card-text"><%= truncate(article.body, length:20) %></p>
+			      <a ><%= link_to "Leer Mas..", article, class: "edit" %></a>
+					  <% if article.user.id == current_user.id %> <%= link_to "Eliminar", article, method: :delete, data: { confirm: 'Esta seguro?' }, class:"red" %> 
+					<%end%>
+			    </div>
+			  </div>
+			</div>
+
+
+

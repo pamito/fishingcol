@@ -1,0 +1,48 @@
+<h1><%= @article.title %></h1>
+<div>
+	<%= @article.body%>
+</div>
+	<% if @article.user.id == current_user.id %>
+	<div>
+	<%= link_to "Editar", edit_article_path(@article), class:"edit" %>
+	</div>
+<%end%>
+<p>
+	Visitas: <%= @article.visist_count %>
+</p>
+
+	<% if @article.cover? %>
+		<div class="field">
+			<%= image_tag @article.cover.url(:thumb) %>
+		</div>
+	<% end %>
+
+	<% if @article.link_video? %>
+
+		<%= raw(youtube_embed (@article.link_video))%>
+
+	<% end %>
+<p>
+	Escrito por: <%= @article.user.email %>
+</p>
+
+<div class="field">
+	<% @article.categories.each do |category| %>
+		<%= link_to category.name, category, style:"color:#{category.color};" %>
+	<%end%>
+</div>
+
+<div class="field">
+	<h3>Comentarios</h3>
+		<% @article.comments.each do |cooment| %>
+		<li>
+		<%= cooment.body %> - <%= link_to cooment.user.email, controller: "articles", action: "from_author", id: cooment.user.id %> 
+		<% if cooment.user.id == current_user.id %> 
+		<%= link_to "Editar", edit_article_comment_path({id:cooment.id, article_id:cooment.article_id}), class:"edit" %> - 
+		<%= link_to 'Eliminar', [cooment.article, cooment], method: :delete, data: { confirm: 'Esta seguro?' }, class:"red" %>
+		</li>
+		<%end%>
+		<%end%>
+		<%= render "comments/form"%>
+	
+</div>

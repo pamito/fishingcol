@@ -1,0 +1,15 @@
+<br>
+<div class="container" style="margin:0 auto;">	
+	<div class="jumbotron">
+		<h1 class="display-4 text-center">ARTICULOS</h1>
+		</div>
+
+	<div class="row">
+		<%= render @articles %>
+	</div>
+	<div class="text-center top-space flickr_pagination">
+		<%= will_paginate @articles %>
+	</div>
+</div>
+		
+

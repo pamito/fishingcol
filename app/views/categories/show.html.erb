@@ -1,0 +1,21 @@
+<br>	
+<div class="container" style="margin:0 auto;">	
+	<div class="jumbotron"  style="background:url(http://localhost:3000/images/mar.jpg); background-size: auto;">
+
+		<h1 class="display-4 text-center" style="color:<%= @category.color %>"><%= @category.name %></h1>
+		</div>
+
+	<div class="row">
+		<%= render @category.articles %>
+	</div>
+	<div class="top-space flickr_pagination">
+		<%= will_paginate @articles %>
+	</div>
+</div>
+
+<div class="text-center top-space">
+<% if current_user.permission_level == 3 %>
+<%= link_to 'Edit', edit_category_path(@category) %> |
+<%= link_to 'Back', categories_path %>
+<% end %>
+</div>

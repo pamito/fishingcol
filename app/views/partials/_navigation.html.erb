@@ -1,0 +1,37 @@
+<header>
+      <script src="https://kit.fontawesome.com/04e41a3463.js" crossorigin="anonymous"></script>
+  		<nav class="be-red white large-padding">
+  			<ul class="no-list row center-xs middle-xs">
+  				<ul class="col-md">
+  					<h1 class="no-margin" id="logo"><%=link_to "FishingCol", root_path %></h1>	
+  				</ul>
+  				  					
+          <% if user_signed_in? %>
+            <ul class="col-md">
+                <%= link_to "Articulos", articles_path %> 
+            </ul>
+            
+            <% @categories.each do |category| %>
+                <ul class="col-md">
+                  <%= link_to category.name, category %>                
+                </ul>
+            
+            <%end%>
+            
+            <ul class="col-md">
+            <%= button_to "Cerrar Sesion", destroy_user_session_path, method: :delete, class: "btn be-red white" %>
+            </ul>
+            <% else %>
+            <ul class="col-md">
+              Otros 
+            </ul>
+            <ul class="col-md">
+            <%= link_to "Iniciar Sesion", new_user_session_path %>
+            </ul>
+            <ul class="col-md">
+            <%= link_to "Crear Cuenta", new_user_registration_path %>
+            </ul>
+            <% end %>
+  			</ul>	
+  		</nav>
+  	</header>
